@@ -1,6 +1,6 @@
 <template>
   <div class="overflow-x-auto w-full">
-    <table v-if="projectStore.projectList.length > 0" class="table">
+    <table v-if="!projectStore.noProjects" class="table">
       <!-- head -->
       <thead>
         <tr>

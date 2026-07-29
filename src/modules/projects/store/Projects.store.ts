@@ -19,6 +19,7 @@ export const useProjectsStore = defineStore('projects', () => {
 
   return {
     projectList: computed(() => [...projects.value] as const),
+    noProjects: computed(() => projects.value.length === 0),
     createNewProject,
   };
 });
