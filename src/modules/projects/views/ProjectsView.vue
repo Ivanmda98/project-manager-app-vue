@@ -1,6 +1,6 @@
 <template>
   <div class="overflow-x-auto w-full">
-    <table class="table">
+    <table v-if="projectStore.projectList.length > 0" class="table">
       <!-- head -->
       <thead>
         <tr>
@@ -11,19 +11,39 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="hover:bg-base-300">
-          <th>2</th>
-          <td>Hart Hagerty</td>
-          <td>Desktop Support Technician</td>
-          <td>Purple</td>
+        <tr
+          v-for="(project, index) in projectStore.projectList"
+          :key="project.id"
+          class="hover:bg-base-300"
+        >
+          <th>{{ index + 1 }}</th>
+          <td>{{ project.name }}</td>
+          <td>{{ project.task.length }}</td>
+          <td><progress class="progress progress-primary w-56" value="1" max="100"></progress></td>
         </tr>
       </tbody>
     </table>
+    <div v-else role="alert" class="alert alert-success">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 shrink-0 stroke-current"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+        />
+      </svg>
+      <span class="text-lg">There are not projects!</span>
+    </div>
   </div>
   <InputModal
     :open="modalOpen"
     @close="modalOpen = false"
-    @value="onNewValue"
+    @value="projectStore.createNewProject"
     :modal-config="modalConfig"
   ></InputModal>
   <FabButton @click="modalOpen = true">
@@ -62,6 +82,11 @@ import FabButton from '@/modules/common/components/FabButton.vue';
 import InputModal from '@/modules/common/components/InputModal.vue';
 import AddCircle from '@/modules/common/icons/AddCircle.vue';
 import { ref } from 'vue';
+import { useProjectsStore } from '../store/Projects.store.ts';
+
+const projectStore = useProjectsStore();
+console.log({ projectStore });
+
 const modalOpen = ref(false);
 const customModalOpen = ref(false);
 const modalConfig = {
@@ -70,8 +95,5 @@ const modalConfig = {
   modalPlaceHolderInput: 'Project Name',
   modalTextMainButton: 'Create',
   modalTextSecondaryButton: 'Cancel',
-};
-const onNewValue = (newValue: string) => {
-  console.log(newValue);
 };
 </script>

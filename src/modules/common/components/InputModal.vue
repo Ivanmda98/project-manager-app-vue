@@ -27,7 +27,7 @@
   <div class="modal-backdrop fixed top-0 left-0 z-10 bg-black opacity-50"></div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, watch, nextTick } from 'vue';
 
 interface Props {
   open: boolean;
@@ -40,7 +40,7 @@ interface Props {
   };
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   modalConfig: () => ({
     modalTitle: 'Hello!',
     modalDescription: 'Press ESC key or click the button below to close',
@@ -57,6 +57,12 @@ const emits = defineEmits<{
   close: [void];
   value: [text: string];
 }>();
+
+watch(props, ({ open }) => {
+  if (open) {
+    nextTick(() => inputRef.value?.focus());
+  }
+});
 
 const submitValue = () => {
   if (!inputValue.value.trim()) {
