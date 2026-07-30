@@ -18,8 +18,17 @@
         >
           <th>{{ index + 1 }}</th>
           <td>{{ project.name }}</td>
-          <td>{{ project.task.length }}</td>
-          <td><progress class="progress progress-primary w-56" value="1" max="100"></progress></td>
+          <td>{{ project.tasks.length }}</td>
+          <td>
+            <progress
+              class="progress progress-primary w-56"
+              :value="
+                projectStore.projectsCompletion.find((projectCom) => projectCom.id === project.id)
+                  ?.completion
+              "
+              max="100"
+            ></progress>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -85,7 +94,6 @@ import { ref } from 'vue';
 import { useProjectsStore } from '../store/Projects.store.ts';
 
 const projectStore = useProjectsStore();
-console.log({ projectStore });
 
 const modalOpen = ref(false);
 const customModalOpen = ref(false);

@@ -1,7 +1,7 @@
 export interface Project {
   id: string;
   name: string;
-  task: Task[];
+  tasks: Task[];
 }
 
 export interface Task {
