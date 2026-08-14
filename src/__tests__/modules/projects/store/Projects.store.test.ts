@@ -93,8 +93,6 @@ describe('useProjectStore tests integration', () => {
     localStorage.setItem('projects', JSON.stringify(fakeProjects));
     const store = useProjectsStore();
 
-    console.log(store.projectsCompletion);
-
     const [project1, project2, project3] = fakeProjects;
     expect(store.projectsCompletion).toEqual([
       {

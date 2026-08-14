@@ -18,7 +18,6 @@ describe('CustomModal.vue integration test', () => {
         modalFooter: '<span>Modal Footer</span>',
       },
     });
-    console.log(wrapper.html());
     const headerContent = wrapper.find('header span');
     const mainContent = wrapper.find('main span');
     const footerContent = wrapper.find('footer span');
