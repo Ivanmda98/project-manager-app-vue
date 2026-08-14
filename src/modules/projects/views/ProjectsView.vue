@@ -55,13 +55,13 @@
     @value="projectStore.createNewProject"
     :modal-config="modalConfig"
   ></InputModal>
-  <FabButton @click="modalOpen = true">
+  <FabButton @add-new-project="modalOpen = true">
     <AddCircle></AddCircle>
   </FabButton>
 
   <!-- button custom modal -->
 
-  <CustomModal :open="customModalOpen" @close="customModalOpen = false">
+  <!-- <CustomModal :open="customModalOpen">
     <template #modalHeader>
       <h1 class="text-lg font-bold">Create new project</h1>
     </template>
@@ -81,12 +81,12 @@
       <button type="submit" class="btn btn-primary">Create</button>
     </template>
   </CustomModal>
-  <FabButton position="bottom-left" @click="customModalOpen = true">
+  <FabButton position="bottom-left" @add-new-project="customModalOpen = true">
     <AddCircle></AddCircle>
-  </FabButton>
+  </FabButton> -->
 </template>
 <script setup lang="ts">
-import CustomModal from '@/modules/common/components/CustomModal.vue';
+// import CustomModal from '@/modules/common/components/CustomModal.vue';
 import FabButton from '@/modules/common/components/FabButton.vue';
 import InputModal from '@/modules/common/components/InputModal.vue';
 import AddCircle from '@/modules/common/icons/AddCircle.vue';
@@ -96,7 +96,7 @@ import { useProjectsStore } from '../store/Projects.store.ts';
 const projectStore = useProjectsStore();
 
 const modalOpen = ref(false);
-const customModalOpen = ref(false);
+// const customModalOpen = ref(false);
 const modalConfig = {
   modalTitle: 'Create new project',
   modalDescription: 'Write project name',

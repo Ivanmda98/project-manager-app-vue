@@ -1,5 +1,5 @@
 <template>
-  <button :class="['btn btn-circle btn-secondary fixed', position]">
+  <button @click="emits('addNewProject')" :class="['btn btn-circle btn-secondary fixed', position]">
     <slot> </slot>
   </button>
 </template>
@@ -12,6 +12,10 @@ interface Props {
 withDefaults(defineProps<Props>(), {
   position: 'bottom-right',
 });
+
+const emits = defineEmits<{
+  addNewProject: [];
+}>();
 </script>
 
 <style scoped>
