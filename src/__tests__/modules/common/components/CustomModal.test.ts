@@ -3,7 +3,11 @@ import { mount } from '@vue/test-utils';
 
 describe('CustomModal.vue integration test', () => {
   test('Should render with default state', () => {
-    const wrapper = mount(CustomModal);
+    const wrapper = mount(CustomModal, {
+      props: {
+        open: false,
+      },
+    });
     expect(wrapper.find('.modal').attributes('open')).toBeUndefined();
   });
 
